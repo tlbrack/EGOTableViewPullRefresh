@@ -27,7 +27,6 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-
 typedef enum{
 	EGOOPullRefreshPulling = 0,
 	EGOOPullRefreshNormal,
@@ -47,6 +46,7 @@ typedef enum{
 
 @property(nonatomic,assign) EGOPullRefreshState state;
 
+- (void)setLastRefreshDate:(NSDate*)date;
 - (void)setCurrentDate;
 - (void)setState:(EGOPullRefreshState)aState;
 

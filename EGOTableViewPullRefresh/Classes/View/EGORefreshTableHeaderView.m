@@ -52,11 +52,11 @@
 		[self addSubview:lastUpdatedLabel];
 		[lastUpdatedLabel release];
 
-		if ([[NSUserDefaults standardUserDefaults] objectForKey:@"EGORefreshTableView_LastRefresh"]) {
-			lastUpdatedLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"EGORefreshTableView_LastRefresh"];
-		} else {
-			[self setCurrentDate];
-		}
+//		if ([[NSUserDefaults standardUserDefaults] objectForKey:@"EGORefreshTableView_LastRefresh"]) {
+//			lastUpdatedLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"EGORefreshTableView_LastRefresh"];
+//		} else {
+//			[self setCurrentDate];
+//		}
 		
 		statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 48.0f, self.frame.size.width, 20.0f)];
 		statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -95,6 +95,21 @@
 	CGContextMoveToPoint(context, 0.0f, self.bounds.size.height - 1);
 	CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height - 1);
 	CGContextStrokePath(context);
+}
+
+- (void)setLastRefreshDate:(NSDate*)date
+{
+  if (!date) {
+    [lastUpdatedLabel setText:NSLocalizedString(@"Never Updated", @"No Last Update Date text")];
+    return;
+  }
+  
+	NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+	[formatter setAMSymbol:@"AM"];
+	[formatter setPMSymbol:@"PM"];
+	[formatter setDateFormat:@"MM/dd/yyyy hh:mm:a"];
+	lastUpdatedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", [formatter stringFromDate:date]];
+	[formatter release];
 }
 
 - (void)setCurrentDate {

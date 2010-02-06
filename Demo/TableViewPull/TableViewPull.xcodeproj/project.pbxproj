@@ -19,7 +19,7 @@
 		3A3D908E11187FE7002B6585 /* TableViewPullAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D908D11187FE7002B6585 /* TableViewPullAppDelegate.m */; };
 		3A3D909E11188064002B6585 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D909D11188064002B6585 /* EGORefreshTableHeaderView.m */; };
 		3A3D90A8111881DE002B6585 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D90A7111881DE002B6585 /* RootViewController.m */; };
-		3A3D910311188495002B6585 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D910211188495002B6585 /* main.m */; };
+		B6A61187111D2106003A30C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A61185111D2106003A30C8 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,9 +39,9 @@
 		3A3D909D11188064002B6585 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		3A3D90A6111881DE002B6585 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		3A3D90A7111881DE002B6585 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		3A3D90C411188297002B6585 /* TableViewPull_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewPull_Prefix.pch; path = ../TableViewPull_Prefix.pch; sourceTree = "<group>"; };
-		3A3D910211188495002B6585 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* TableViewPull-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TableViewPull-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		B6A61185111D2106003A30C8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B6A61186111D2106003A30C8 /* TableViewPull_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewPull_Prefix.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,10 +93,10 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				3A3D910211188495002B6585 /* main.m */,
-				3A3D90C411188297002B6585 /* TableViewPull_Prefix.pch */,
+				B6A61185111D2106003A30C8 /* main.m */,
+				B6A61186111D2106003A30C8 /* TableViewPull_Prefix.pch */,
 			);
-			path = "Other Sources";
+			name = "Other Sources";
 			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
@@ -232,7 +232,7 @@
 				3A3D908E11187FE7002B6585 /* TableViewPullAppDelegate.m in Sources */,
 				3A3D909E11188064002B6585 /* EGORefreshTableHeaderView.m in Sources */,
 				3A3D90A8111881DE002B6585 /* RootViewController.m in Sources */,
-				3A3D910311188495002B6585 /* main.m in Sources */,
+				B6A61187111D2106003A30C8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -34,7 +34,16 @@
 @implementation EGORefreshTableHeaderView
 
 @synthesize state=_state;
+@synthesize bottomBorderThickness;
+@synthesize bottomBorderColor;
 
+// Sets up the frame following the recipe in the samples except it doesn't *overlap* the partner view,
+// ensuring that if you choose to draw a bottom border (by setting bottomBorderThickness > 0.0) then
+// you'll get a proper border, not a partially obscured one.
+- (id)initWithFrameRelativeToFrame:(CGRect)originalFrame {
+	CGRect relativeFrame = CGRectMake(0.0f, 0.0f - (originalFrame.size.height + 1.0f), originalFrame.size.width, originalFrame.size.height);
+	return [self initWithFrame:relativeFrame];
+}
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -87,13 +96,20 @@
     return self;
 }
 
+// Will only draw a bottom border if you've set bottomBorderThickness to be > 0.0
+// and makes sure that the stroke is correctly centered so you get a border as thick
+// as you've asked for.
 - (void)drawRect:(CGRect)rect{
+	if ([self bottomBorderThickness] == 0.0f) return;
+	CGFloat strokeOffset = [self bottomBorderThickness] / 2.0f;
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextDrawPath(context,  kCGPathFillStroke);
-	[BORDER_COLOR setStroke];
+	UIColor *strokeColor = ([self bottomBorderColor]) ? [self bottomBorderColor] : BORDER_COLOR;
+	[strokeColor setStroke];
+	CGContextSetLineWidth(context, [self bottomBorderThickness]);
 	CGContextBeginPath(context);
-	CGContextMoveToPoint(context, 0.0f, self.bounds.size.height - 1);
-	CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height - 1);
+	CGContextMoveToPoint(context, 0.0f, self.bounds.size.height - strokeOffset);
+	CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height - strokeOffset);
 	CGContextStrokePath(context);
 }
 
@@ -171,6 +187,7 @@
 }
 
 - (void)dealloc {
+	[bottomBorderColor release], bottomBorderColor = nil;
 	activityView = nil;
 	statusLabel = nil;
 	arrowImage = nil;

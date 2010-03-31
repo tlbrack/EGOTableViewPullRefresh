@@ -41,11 +41,16 @@ typedef enum{
 	UIActivityIndicatorView *activityView;
 	
 	EGOPullRefreshState _state;
+	UIColor *bottomBorderColor;
+	CGFloat bottomBorderThickness;
 
 }
 
 @property(nonatomic,assign) EGOPullRefreshState state;
+@property(nonatomic,retain) UIColor *bottomBorderColor;
+@property(nonatomic,assign) CGFloat bottomBorderThickness;
 
+- (id)initWithFrameRelativeToFrame:(CGRect)originalFrame;
 - (void)setLastRefreshDate:(NSDate*)date;
 - (void)setCurrentDate;
 - (void)setState:(EGOPullRefreshState)aState;

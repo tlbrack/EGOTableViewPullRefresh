@@ -31,6 +31,7 @@ typedef enum{
 	EGOOPullRefreshPulling = 0,
 	EGOOPullRefreshNormal,
 	EGOOPullRefreshLoading,	
+	EGOOPullRefreshUpToDate,
 } EGOPullRefreshState;
 
 @interface EGORefreshTableHeaderView : UIView {

@@ -37,6 +37,18 @@
 @synthesize bottomBorderThickness;
 @synthesize bottomBorderColor;
 
+static NSDateFormatter *refreshFormatter;
+
+
++ (void)initialize
+{
+  /* Formatter for last refresh date */
+  refreshFormatter = [[NSDateFormatter alloc] init];
+  [refreshFormatter setDateStyle:NSDateFormatterShortStyle];
+  [refreshFormatter setTimeStyle:NSDateFormatterShortStyle];
+}
+
+
 // Sets up the frame following the recipe in the samples except it doesn't *overlap* the partner view,
 // ensuring that if you choose to draw a bottom border (by setting bottomBorderThickness > 0.0) then
 // you'll get a proper border, not a partially obscured one.
@@ -120,23 +132,13 @@
     return;
   }
   
-	NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-	[formatter setAMSymbol:@"AM"];
-	[formatter setPMSymbol:@"PM"];
-	[formatter setDateFormat:@"MM/dd/yyyy hh:mm:a"];
-	lastUpdatedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", [formatter stringFromDate:date]];
-	[formatter release];
+	lastUpdatedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", [refreshFormatter stringFromDate:date]];
 }
 
 - (void)setCurrentDate {
-	NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-	[formatter setAMSymbol:@"AM"];
-	[formatter setPMSymbol:@"PM"];
-	[formatter setDateFormat:@"MM/dd/yyyy hh:mm:a"];
-	lastUpdatedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", [formatter stringFromDate:[NSDate date]]];
-	[[NSUserDefaults standardUserDefaults] setObject:lastUpdatedLabel.text forKey:@"EGORefreshTableView_LastRefresh"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-	[formatter release];
+	lastUpdatedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", [refreshFormatter stringFromDate:[NSDate date]]];
+//	[[NSUserDefaults standardUserDefaults] setObject:lastUpdatedLabel.text forKey:@"EGORefreshTableView_LastRefresh"];
+//	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setState:(EGOPullRefreshState)aState{
@@ -173,6 +175,16 @@
 			
 			statusLabel.text = @"Loading...";
 			[activityView startAnimating];
+			[CATransaction begin];
+			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
+			arrowImage.hidden = YES;
+			[CATransaction commit];
+			
+			break;
+		case EGOOPullRefreshUpToDate:
+        
+			statusLabel.text = @"Up-to-date.";
+			[activityView stopAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
 			arrowImage.hidden = YES;

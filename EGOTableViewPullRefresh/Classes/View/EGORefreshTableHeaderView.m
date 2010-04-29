@@ -28,7 +28,7 @@
 
 
 #define TEXT_COLOR	 [UIColor colorWithRed:87.0/255.0 green:108.0/255.0 blue:137.0/255.0 alpha:1.0]
-#define BORDER_COLOR [UIColor colorWithRed:87.0/255.0 green:108.0/255.0 blue:137.0/255.0 alpha:1.0]
+#define BORDER_COLOR [UIColor colorWithRed:160.0/255.0 green:173.0/255.0 blue:182.0/255.0 alpha:1.0]
 
 
 @implementation EGORefreshTableHeaderView
@@ -53,7 +53,8 @@ static NSDateFormatter *refreshFormatter;
 // ensuring that if you choose to draw a bottom border (by setting bottomBorderThickness > 0.0) then
 // you'll get a proper border, not a partially obscured one.
 - (id)initWithFrameRelativeToFrame:(CGRect)originalFrame {
-	CGRect relativeFrame = CGRectMake(0.0f, 0.0f - (originalFrame.size.height + 1.0f), originalFrame.size.width, originalFrame.size.height);
+	CGRect relativeFrame = CGRectMake(0.0f, 0.0f - originalFrame.size.height, originalFrame.size.width, originalFrame.size.height);
+	[self setBottomBorderThickness:1.0f];
 	return [self initWithFrame:relativeFrame];
 }
 

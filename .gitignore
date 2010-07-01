@@ -1,11 +1,11 @@
 build
 **/build
+
 **/*xcodeproj/*.mode*
-**/*xcodeproj/*pbxuser
-**/*xcodeproj/*per*
-*xcodeproj/*.mode*
-*xcodeproj/*pbxuser
-*xcodeproj/*per*
+**/**/*xcodeproj/*pbxuser
+**/**/*xcodeproj/*per*
+**/**/*xcodeproj/*.mode*
+
 *tmproj
 ~*
 .DS_Store

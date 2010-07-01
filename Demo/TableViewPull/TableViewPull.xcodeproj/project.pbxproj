@@ -20,6 +20,7 @@
 		88FE175C11DC6DD9000453E2 /* blueArrow_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 88FE175811DC6DD9000453E2 /* blueArrow_new.png */; };
 		88FE175D11DC6DD9000453E2 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 88FE175911DC6DD9000453E2 /* blueArrow.png */; };
 		88FE175E11DC6DD9000453E2 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 88FE175A11DC6DD9000453E2 /* whiteArrow.png */; };
+		88FE177D11DC7340000453E2 /* PullToRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FE177C11DC7340000453E2 /* PullToRefreshTableViewController.m */; };
 		B6A61187111D2106003A30C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A61185111D2106003A30C8 /* main.m */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,8 @@
 		88FE175811DC6DD9000453E2 /* blueArrow_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueArrow_new.png; path = ../../EGOTableViewPullRefresh/Resources/blueArrow_new.png; sourceTree = SOURCE_ROOT; };
 		88FE175911DC6DD9000453E2 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueArrow.png; path = ../../EGOTableViewPullRefresh/Resources/blueArrow.png; sourceTree = SOURCE_ROOT; };
 		88FE175A11DC6DD9000453E2 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whiteArrow.png; path = ../../EGOTableViewPullRefresh/Resources/whiteArrow.png; sourceTree = SOURCE_ROOT; };
+		88FE177B11DC7340000453E2 /* PullToRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PullToRefreshTableViewController.h; path = ../../EGOTableViewPullRefresh/Classes/Controller/PullToRefreshTableViewController.h; sourceTree = SOURCE_ROOT; };
+		88FE177C11DC7340000453E2 /* PullToRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PullToRefreshTableViewController.m; path = ../../EGOTableViewPullRefresh/Classes/Controller/PullToRefreshTableViewController.m; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* TableViewPull-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TableViewPull-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		B6A61185111D2106003A30C8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B6A61186111D2106003A30C8 /* TableViewPull_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewPull_Prefix.pch; sourceTree = "<group>"; };
@@ -64,8 +67,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3A3D90931118801F002B6585 /* Controller */,
-				3A3D909211188012002B6585 /* View */,
+				88FE177B11DC7340000453E2 /* PullToRefreshTableViewController.h */,
+				88FE177C11DC7340000453E2 /* PullToRefreshTableViewController.m */,
+				88FE170911DC6B0B000453E2 /* EGORefreshTableHeaderView.h */,
+				88FE170A11DC6B0B000453E2 /* EGORefreshTableHeaderView.m */,
 				3A3D908411187FAD002B6585 /* Delegate */,
 			);
 			path = Classes;
@@ -82,6 +87,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				88FE178B11DC739F000453E2 /* RootViewController */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -134,38 +140,13 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
-		3A3D909211188012002B6585 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				3A3D909B11188064002B6585 /* RefreshTableHeaderView */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		3A3D90931118801F002B6585 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				3A3D90A5111881DE002B6585 /* RootViewController */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		3A3D909B11188064002B6585 /* RefreshTableHeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				88FE170911DC6B0B000453E2 /* EGORefreshTableHeaderView.h */,
-				88FE170A11DC6B0B000453E2 /* EGORefreshTableHeaderView.m */,
-			);
-			path = RefreshTableHeaderView;
-			sourceTree = "<group>";
-		};
-		3A3D90A5111881DE002B6585 /* RootViewController */ = {
+		88FE178B11DC739F000453E2 /* RootViewController */ = {
 			isa = PBXGroup;
 			children = (
 				88FE172111DC6B4B000453E2 /* RootViewController.h */,
 				88FE172211DC6B4B000453E2 /* RootViewController.m */,
 			);
-			path = RootViewController;
+			name = RootViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +218,7 @@
 				B6A61187111D2106003A30C8 /* main.m in Sources */,
 				88FE170B11DC6B0B000453E2 /* EGORefreshTableHeaderView.m in Sources */,
 				88FE172311DC6B4B000453E2 /* RootViewController.m in Sources */,
+				88FE177D11DC7340000453E2 /* PullToRefreshTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +235,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TableViewPull_Prefix.pch;
 				INFOPLIST_FILE = "Resources/TableViewPull-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = TableViewPull;
 				SDKROOT = iphonesimulator4.0;
 			};
@@ -266,6 +249,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TableViewPull_Prefix.pch;
 				INFOPLIST_FILE = "Resources/TableViewPull-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = TableViewPull;
 				SDKROOT = iphonesimulator4.0;
 			};

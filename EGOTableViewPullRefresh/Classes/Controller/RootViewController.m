@@ -25,31 +25,12 @@
 //
 
 #import "RootViewController.h"
-#import "EGORefreshTableHeaderView.h"
-
-@interface RootViewController (Private)
-
-- (void)dataSourceDidFinishLoadingNewData;
-
-@end
-
 
 @implementation RootViewController
 
-@synthesize reloading=_reloading;
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-	if (refreshHeaderView == nil) {
-		refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, 320.0f, self.tableView.bounds.size.height)];
-		refreshHeaderView.backgroundColor = [UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0];
-		refreshHeaderView.bottomBorderThickness = 1.0;
-		[self.tableView addSubview:refreshHeaderView];
-		self.tableView.showsVerticalScrollIndicator = YES;
-		[refreshHeaderView release];
-	}
+	[self.refreshHeaderView setLastRefreshDate:nil];
 }
 
 
@@ -89,10 +70,6 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload {
-	refreshHeaderView=nil;
-}
-
 
 #pragma mark Table view methods
 
@@ -125,13 +102,13 @@
 - (void)reloadTableViewDataSource{
 	//  should be calling your tableviews model to reload
 	//  put here just for demo
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+	[super performSelector:@selector(dataSourceDidFinishLoadingNewData) withObject:nil afterDelay:3.0];
+	
 }
-
-
-- (void)doneLoadingTableViewData{
-	//  model should call this when its done loading
-	[self dataSourceDidFinishLoadingNewData];
+- (void)dataSourceDidFinishLoadingNewData{
+	[refreshHeaderView setCurrentDate];  //  should check if data reload was successful 
+	
+	[super dataSourceDidFinishLoadingNewData];
 }
 
 
@@ -187,48 +164,10 @@
 */
 
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{	
-	
-	if (scrollView.isDragging) {
-		if (refreshHeaderView.state == EGOOPullRefreshPulling && scrollView.contentOffset.y > -65.0f && scrollView.contentOffset.y < 0.0f && !_reloading) {
-			[refreshHeaderView setState:EGOOPullRefreshNormal];
-		} else if (refreshHeaderView.state == EGOOPullRefreshNormal && scrollView.contentOffset.y < -65.0f && !_reloading) {
-			[refreshHeaderView setState:EGOOPullRefreshPulling];
-		}
-	}
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-	
-	if (scrollView.contentOffset.y <= - 65.0f && !_reloading) {
-			_reloading = YES;
-			[self reloadTableViewDataSource];
-			[refreshHeaderView setState:EGOOPullRefreshLoading];
-			[UIView beginAnimations:nil context:NULL];
-			[UIView setAnimationDuration:0.2];
-			self.tableView.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
-			[UIView commitAnimations];
-	}
-}
-
-- (void)dataSourceDidFinishLoadingNewData{
-	
-	_reloading = NO;
-	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:.3];
-	[self.tableView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
-	[UIView commitAnimations];
-	
-	[refreshHeaderView setState:EGOOPullRefreshNormal];
-	[refreshHeaderView setCurrentDate];  //  should check if data reload was successful 
-}
-
 #pragma mark -
 #pragma mark Dealloc
 
 - (void)dealloc {
-	refreshHeaderView = nil;
     [super dealloc];
 }
 

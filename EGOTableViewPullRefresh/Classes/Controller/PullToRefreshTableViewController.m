@@ -13,9 +13,9 @@
 @implementation PullToRefreshTableViewController
 @synthesize reloading=_reloading;
 @synthesize refreshHeaderView;
+@synthesize tableView;
 
-#pragma mark -
-#pragma mark View lifecycle
+#pragma mark - View lifecycle
 
 
 - (void)viewDidLoad {
@@ -23,11 +23,14 @@
 
 	 if (refreshHeaderView == nil) {
 		 refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, 320.0f, self.tableView.bounds.size.height)];
-		 refreshHeaderView.backgroundColor = [UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0];
-		 refreshHeaderView.bottomBorderThickness = 1.0;
+		 //refreshHeaderView.backgroundColor = [UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0];
+         //refreshHeaderView.backgroundColor = [UIColor colorWithRed:242.0/255.0 green:240.0/255.0 blue:214.0/255.0 alpha:1.0];
+         refreshHeaderView.backgroundColor = [UIColor whiteColor];
+		 //refreshHeaderView.bottomBorderThickness = 1.0;
+		 refreshHeaderView.bottomBorderThickness = 0.0;
 		 [self.tableView addSubview:refreshHeaderView];
 		 self.tableView.showsVerticalScrollIndicator = YES;
-		 [refreshHeaderView release];
+		 //[refreshHeaderView release];
 	 }
  
 }
@@ -53,9 +56,7 @@
 }
 */
 
-
-#pragma mark -
-#pragma mark Table view data source
+#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
@@ -70,11 +71,11 @@
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
@@ -124,9 +125,7 @@
 }
 */
 
-
-#pragma mark -
-#pragma mark Table view delegate
+#pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
@@ -139,8 +138,8 @@
 	 */
 }
 
-#pragma mark -
-#pragma mark ScrollView Callbacks
+#pragma mark - ScrollView Callbacks
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{	
 	
 	if (scrollView.isDragging) {
@@ -156,7 +155,7 @@
 	
 	if (scrollView.contentOffset.y <= - 65.0f && !_reloading) {
 		_reloading = YES;
-		[self reloadTableViewDataSource];
+		[self refreshDataSource];
 		[refreshHeaderView setState:EGOOPullRefreshLoading];
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.2];
@@ -164,8 +163,8 @@
 		[UIView commitAnimations];
 	}
 }
-#pragma mark -
-#pragma mark refreshHeaderView Methods
+
+#pragma mark - refreshHeaderView Methods
 
 - (void)dataSourceDidFinishLoadingNewData{
 	
@@ -178,14 +177,12 @@
 	
 	[refreshHeaderView setState:EGOOPullRefreshNormal];
 }
-- (void) reloadTableViewDataSource
-{
-	NSLog(@"Please override reloadTableViewDataSource");
+
+- (void)refreshDataSource {
+	NSLog(@"Please override refreshDataSource");
 }
 
-
-#pragma mark -
-#pragma mark Memory management
+#pragma mark - Memory management
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -196,11 +193,13 @@
 
 - (void)viewDidUnload {
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-	refreshHeaderView=nil;
+	self.refreshHeaderView=nil;
+    self.tableView = nil;
 }
 
-
 - (void)dealloc {
+    [refreshHeaderView release];
+    [tableView release];
     [super dealloc];
 }
 

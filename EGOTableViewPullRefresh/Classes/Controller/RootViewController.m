@@ -99,7 +99,7 @@
     return cell;
 }
 
-- (void)reloadTableViewDataSource{
+- (void)refreshDataSource{
 	//  should be calling your tableviews model to reload
 	//  put here just for demo
 	[super performSelector:@selector(dataSourceDidFinishLoadingNewData) withObject:nil afterDelay:3.0];

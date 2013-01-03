@@ -7,7 +7,6 @@
 //
 
 #import "PullToRefreshTableViewController.h"
-#import "EGORefreshTableHeaderView.h"
 
 
 @implementation PullToRefreshTableViewController
